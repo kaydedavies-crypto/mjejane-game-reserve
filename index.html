@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mjejane Game Reserve, Greater Kruger, South Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==============================
+       CSS CUSTOM PROPERTIES
+    ============================== */
+    :root {
+      --forest:        #1c2b1c;
+      --forest-light:  #243824;
+      --forest-deep:   #0f1a0f;
+      --gold:          #b8963e;
+      --gold-light:    #cca94e;
+      --gold-dark:     #9a7a2e;
+      --white:         #FFFFFF;
+      --warm:          #f6f3ee;
+      --warm-mid:      #ece7de;
+      --body-text:     #1c2b1c;
+      --body-text-dim: #4a5a4a;
+      --nav-h:         116px;
+      --transition:    0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ==============================
+       RESET & BASE
+    ============================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--white);
+      color: var(--body-text);
+      overflow-x: hidden;
+      line-height: 1.75;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ==============================
+       TYPOGRAPHY
+    ============================== */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant', serif;
+      line-height: 1.15;
+      font-weight: 500;
+      color: var(--forest);
+    }
+
+    h1 { font-size: clamp(2.4rem, 5vw, 5rem); letter-spacing: 0.01em; font-weight: 300; }
+    h2 { font-size: clamp(2.4rem, 4.5vw, 4.2rem); font-weight: 300; letter-spacing: 0.01em; }
+    h3 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 300; }
+    h4 { font-size: 1.1rem; font-weight: 400; letter-spacing: 0.02em; }
+
+    p {
+      font-size: 0.87rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      color: var(--body-text-dim);
+      line-height: 2;
+    }
+
+    /* ==============================
+       UTILITIES
+    ============================== */
+    .gold-divider {
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--gold);
+      margin: 1.4rem auto;
+      opacity: 0.7;
+    }
+    .gold-divider.left { margin-left: 0; }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      opacity: 0.85;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    .section { padding: 9rem 0; }
+
+    .section-alt { background: var(--warm); }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .reveal.visible           { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1           { transition-delay: 0.15s; }
+    .reveal-delay-2           { transition-delay: 0.30s; }
+    .reveal-delay-3           { transition-delay: 0.45s; }
+    .reveal-delay-4           { transition-delay: 0.60s; }
+
+    /* ==============================
+       NAVIGATION
+    ============================== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      transition: background var(--transition), box-shadow var(--transition), height var(--transition);
+      background: transparent;
+    }
+
+    /* Scrolled: crisp white */
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 2px 40px rgba(26,46,26,0.1);
+      height: 72px;
+      backdrop-filter: blur(14px);
+    }
+
+    /* Nav logo area */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 0;
+    }
+
+    .nav-logo-img-wrap {
+      width: 100px;
+      height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Scrolled (white nav): shift gold -> forest green */
+    .nav-logo-img {
+      width: 96px;
+      height: 82px;
+      object-fit: contain;
+      /* Scrolled (white nav): forest green */
+      filter: sepia(1) hue-rotate(78deg) saturate(2.5) brightness(0.48);
+      transition: filter 0.4s ease;
+    }
+
+    /* Hero (dark bg): white */
+    #navbar:not(.scrolled) .nav-logo-img {
+      filter: brightness(0) invert(1);
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      margin-left: 0.6rem;
+    }
+
+    .nav-logo-text span:first-child {
+      font-family: 'Cormorant', serif;
+      font-size: 2.1rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+
+    #navbar.scrolled .nav-logo-text span:first-child { color: var(--forest); }
+
+    .nav-logo-text span:last-child {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.3s;
+    }
+
+    #navbar.scrolled .nav-logo-text span:last-child { color: var(--body-text-dim); opacity: 0.6; }
+
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.3s;
+    }
+
+    #navbar.scrolled .nav-links a { color: var(--forest); }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.35s ease;
+    }
+
+    .nav-links a:hover { color: var(--gold) !important; }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.5) !important;
+      color: rgba(255,255,255,0.9) !important;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.58rem !important;
+      letter-spacing: 0.28em;
+      transition: all 0.4s !important;
+    }
+
+    #navbar.scrolled .nav-cta {
+      border-color: var(--gold) !important;
+      color: var(--gold) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--forest-deep) !important;
+      border-color: var(--gold) !important;
+    }
+
+    .nav-cta::after { display: none !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 1.5px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: 'Cormorant', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--forest);
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover { color: var(--gold); }
+
+    /* ==============================
+       HERO
+    ============================== */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('mjejane-assets/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.08);
+      transition: transform 8s ease-out;
+      will-change: transform;
+    }
+
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,18,8,0.18) 0%,
+        rgba(8,18,8,0.42) 55%,
+        rgba(8,18,8,0.78) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      padding: 0 2rem 6rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.57rem;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease 0.4s forwards;
+    }
+
+    .hero-title {
+      color: var(--white);
+      opacity: 0;
+      animation: fadeSlideUp 1s ease 0.7s forwards;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.45);
+    }
+
+    .hero-title em { font-style: italic; color: var(--white); font-weight: 300; }
+
+    .hero-sub {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      margin: 1.5rem auto 2.8rem;
+      max-width: 600px;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease 1s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease 1.3s forwards;
+    }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 2.2rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease 2s forwards;
+      cursor: pointer;
+    }
+
+    .hero-scroll span {
+      font-size: 0.56rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .scroll-line {
+      width: 1px; height: 52px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,100% { opacity:1; transform:scaleY(1); }
+      50%      { opacity:0.4; transform:scaleY(0.6); }
+    }
+
+    /* ==============================
+       BUTTONS
+    ============================== */
+    .btn {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.6rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content:'';
+      position:absolute;
+      top:50%; left:50%;
+      width:0; height:0;
+      background:rgba(255,255,255,0.14);
+      border-radius:50%;
+      transform:translate(-50%,-50%);
+      transition:width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn:hover::before { width:300px; height:300px; }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--forest-deep);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.55);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .btn-forest {
+      background: var(--forest);
+      color: var(--gold);
+      border: 1px solid var(--forest);
+    }
+
+    .btn-forest:hover {
+      background: var(--gold);
+      color: var(--forest-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.3);
+    }
+
+    .btn-forest-outline {
+      background: transparent;
+      color: var(--forest);
+      border: 1px solid var(--forest);
+    }
+
+    .btn-forest-outline:hover {
+      background: var(--forest);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    
+      to   { transform:translateX(-50%); }
+    }
+
+    /* ==============================
+       ABOUT
+    ============================== */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-image-wrap { position: relative; }
+
+    .about-image-wrap::before {
+      content: '';
+      position: absolute;
+      top: -18px; left: -18px;
+      right: 18px; bottom: 18px;
+      border: 1px solid var(--gold);
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    .about-main-img {
+      position: relative; z-index: 1;
+      height: 530px; overflow: hidden;
+    }
+
+    .about-main-img img { transition: transform 0.8s ease; }
+    .about-main-img:hover img { transform: scale(1.04); }
+
+    .about-badge { display: none; }
+
+    .about-text h2 { color: var(--forest); margin-bottom: 0.5rem; }
+
+    .about-text p { margin-bottom: 1.2rem; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(26,46,26,0.1);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant', serif;
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--forest); line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.55rem; font-weight: 500;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold-dark); opacity: 0.8;
+      margin-top: 0.5rem; display: block;
+    }
+
+    /* ==============================
+       ACTIVITIES
+    ============================== */
+    #activities {
+      background: var(--forest-deep);
+      position: relative;
+      padding-bottom: 0;
+    }
+
+    #activities .section-header h2 { color: var(--warm); }
+    #activities .section-header p  { color: var(--white); opacity: 0.82; }
+
+    /* Each activity row */
+    .act-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 420px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+
+    /* Image panel */
+    .act-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .act-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+
+    .act-row:hover .act-img img { transform: scale(1.05); }
+
+    /* Text panel */
+    .act-text {
+      background: var(--forest);
+      padding: 4rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: background 0.4s ease;
+    }
+
+    .act-row:hover .act-text { background: var(--forest-light); }
+
+    /* Alternate: even rows flip image to right */
+    .act-row:nth-child(even) .act-img  { order: 2; }
+    .act-row:nth-child(even) .act-text { order: 1; }
+
+    /* Gold left border accent on text panel */
+    .act-row .act-text {
+      border-left: 1px solid rgba(201,168,76,0.12);
+    }
+    .act-row:nth-child(even) .act-text {
+      border-left: none;
+      border-right: 1px solid rgba(201,168,76,0.12);
+    }
+
+    /* Shared number */
+    .act-num {
+      font-family: 'Cormorant', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--gold);
+      opacity: 0.5;
+      display: block;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Activity title */
+    .act-text h3 {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      font-weight: 300;
+      color: var(--warm);
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+
+    .act-text h3 em { font-style: italic; color: var(--gold); }
+
+    /* Gold rule */
+    .act-rule {
+      width: 36px; height: 1px;
+      background: var(--gold); opacity: 0.45;
+      margin-bottom: 1.4rem;
+      display: block;
+    }
+
+    /* Body copy */
+    .act-text p {
+      font-size: 0.86rem;
+      line-height: 2;
+      color: var(--white);
+      opacity: 0.8;
+      max-width: 420px;
+    }
+
+    .activity-icon { display: none; }
+
+    /* ==============================
+       PARALLAX QUOTE
+    ============================== */
+    .quote-section {
+      position: relative;
+      padding: 9rem 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .quote-bg {
+      position: absolute; inset: 0;
+      background-image: url('mjejane-assets/quote.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      background-attachment: fixed;
+    }
+
+    .quote-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,22,10,0.72);
+    }
+
+    .quote-content { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+
+    .quote-content blockquote {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-style: italic; font-weight: 300;
+      color: var(--white); line-height: 1.4;
+    }
+
+    .quote-content cite {
+      display: block; margin-top: 1.6rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); font-style: normal;
+    }
+
+    /* ==============================
+       GALLERY
+    ============================== */
+    #gallery { background: var(--warm); }
+
+    .masonry-grid { column-count: 3; column-gap: 8px; }
+
+    .masonry-item {
+      break-inside: avoid; margin-bottom: 8px;
+      overflow: hidden; position: relative; cursor: pointer;
+    }
+
+    .masonry-item img {
+      display: block; width: 100%; height: auto;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(201,168,76,0.0);
+      transition: background 0.4s ease;
+    }
+
+    .masonry-item:hover img { transform: scale(1.05); }
+    .masonry-item:hover::after { background: rgba(201,168,76,0.07); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain; }
+
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 40px; height: 40px;
+      border: 1px solid var(--gold);
+      background: transparent; color: var(--gold);
+      font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s;
+    }
+    .lightbox-close:hover { background: var(--gold); color: var(--forest-deep); }
+
+    /* ==============================
+       CONTACT
+    ============================== */
+    #contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info h2 { color: var(--forest); margin-bottom: 1rem; }
+    .contact-info > p { margin-bottom: 2rem; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(26,46,26,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; color: var(--gold-dark);
+    }
+
+    .contact-item-text { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .contact-item-text span:first-child {
+      font-size: 0.57rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-dark);
+    }
+
+    .contact-item-text span:last-child {
+      font-size: 0.83rem; color: var(--body-text-dim);
+    }
+
+    .map-embed {
+      margin-top: 2.5rem; height: 220px;
+      overflow: hidden;
+      border: 1px solid rgba(26,46,26,0.12);
+    }
+
+    .map-embed iframe { width: 100%; height: 100%; border: 0; }
+
+    /* Contact Form */
+    .contact-form-wrap {
+      background: var(--white);
+      border: 1px solid rgba(26,46,26,0.1);
+      padding: 3.5rem;
+    }
+
+    .contact-form-wrap h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem; color: var(--forest);
+      margin-bottom: 2.5rem; font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+
+    .form-group { margin-bottom: 1.4rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.56rem; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--body-text-dim); opacity: 0.7; margin-bottom: 0.6rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--white);
+      border: 1px solid rgba(26,46,26,0.18);
+      color: var(--forest);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.83rem; font-weight: 400;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+
+    .form-group select option { background: var(--white); color: var(--forest); }
+
+    .form-group textarea { height: 130px; resize: vertical; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* Form success */
+    .form-success { display: none; text-align: center; padding: 3rem 1rem; }
+    .form-success.show { display: block; }
+    .form-success .success-icon { font-size: 3rem; color: var(--gold-dark); margin-bottom: 1rem; }
+    .form-success h4 { font-family: 'Cormorant', serif; font-size: 2rem; color: var(--forest); margin-bottom: 0.5rem; }
+    .form-success p { font-size: 0.85rem; }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+    footer { background: var(--forest-deep); padding: 4.5rem 0 2rem; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-logo-img {
+      width: 100px; height: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-brand p {
+      font-size: 0.8rem; color: rgba(245,240,232,0.55);
+      line-height: 1.85; margin-top: 1.2rem; max-width: 270px;
+    }
+
+    .footer-socials { display: flex; gap: 0.7rem; margin-top: 1.5rem; }
+
+    .social-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; color: var(--gold);
+      transition: background 0.3s, border-color 0.3s; cursor: pointer;
+    }
+
+    .social-btn:hover { background: var(--gold); color: var(--forest-deep); border-color: var(--gold); }
+
+    .footer-col h5 {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.55rem; font-weight: 500;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(201,168,76,0.75); margin-bottom: 1.5rem;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.45);
+      transition: opacity 0.3s, color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold); opacity: 1; }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-bottom p { font-size: 0.68rem; color: rgba(245,240,232,0.3); letter-spacing: 0.04em; }
+
+    /* ==============================
+       WHATSAPP FLOAT
+    ============================== */
+    .whatsapp-float {
+      position: fixed; bottom: 2rem; right: 2rem;
+      z-index: 900; width: 58px; height: 58px;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.12);
+    }
+
+    .whatsapp-float svg { width: 44px; height: 44px; fill: #25D366; }
+
+    .whatsapp-tooltip {
+      position: absolute; right: 70px;
+      background: var(--forest-deep);
+      color: rgba(245,240,232,0.9);
+      font-size: 0.7rem; font-weight: 600;
+      white-space: nowrap;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
+
+    /* ==============================
+       KEYFRAMES
+    ============================== */
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+    @media (max-width: 1024px) {
+      .accom-grid    { grid-template-columns: repeat(2,1fr); }
+      .act-row { grid-template-columns: 1fr; min-height: auto; }
+      .act-img { height: 300px; }
+      .act-row:nth-child(even) .act-img { order: 0; }
+      .act-row:nth-child(even) .act-text { order: 1; border-right: none; border-left: 1px solid rgba(201,168,76,0.12); }
+      .about-grid    { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { display: none; }
+      .footer-top    { grid-template-columns: 1fr 1fr; }
+      .contact-grid  { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --nav-h: 72px; }
+      .nav-links  { display: none; }
+      .hamburger  { display: flex; }
+      .accom-grid { grid-template-columns: 1fr; }
+      .masonry-grid { column-count: 2; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row   { grid-template-columns: 1fr; }
+      .contact-form-wrap { padding: 2rem; }
+      .section    { padding: 6rem 0; }
+      .about-stats { grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-grid    { column-count: 1; }
+      .act-text { padding: 2.8rem 2rem; }
+      .about-stats     { grid-template-columns: 1fr; }
+    }
+
+    /* ==============================
+       LUXURY REFINEMENTS
+    ============================== */
+
+    /* Thin gold top border on scrolled nav */
+    #navbar.scrolled::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(184,150,62,0.25), transparent);
+    }
+
+    /* Hero title, thinner, more refined */
+    .hero-title {
+      font-weight: 300 !important;
+      letter-spacing: 0.01em;
+    }
+
+    /* Refined quote blockquote */
+    .quote-content blockquote {
+      font-weight: 300;
+      letter-spacing: 0.01em;
+    }
+
+    /* Activity num italic numeral */
+    .activity-num {
+      font-family: 'Cormorant', serif;
+      font-style: italic;
+      font-size: 0.78rem;
+      color: var(--gold-dark);
+      opacity: 0.65;
+      display: block;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Thin separator line in about stats */
+    .about-stats {
+      padding-top: 2.8rem;
+      margin-top: 2.8rem;
+    }
+
+    /* Refined form inputs */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border-radius: 0;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      opacity: 0.4;
+      font-weight: 300;
+    }
+
+    /* Section header refined */
+    .section-header {
+      margin-bottom: 5rem;
+    }
+
+    /* Contact item icon, slimmer */
+    .contact-item-icon {
+      border-color: rgba(26,46,26,0.12);
+      font-size: 0.9rem;
+      color: var(--body-text-dim);
+      opacity: 0.65;
+    }
+
+    .contact-item-text span:first-child {
+      letter-spacing: 0.28em;
+      opacity: 0.7;
+    }
+
+    /* Footer bottom line */
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Accom price, refined */
+    .accom-price span:first-child {
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+
+    /* Accom feature tags, lighter */
+    .accom-feature {
+      font-weight: 400;
+      opacity: 0.75;
+    }
+
+    /* Mobile nav, refined */
+    .mobile-nav a {
+      font-weight: 300;
+      font-size: 2.8rem;
+    }
+
+    /* Reveal, gentler */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    /* Hero scroll line, thinner */
+    .hero-scroll span {
+      font-size: 0.53rem;
+      letter-spacing: 0.35em;
+      font-weight: 400;
+    }
+
+    /* Nav logo text refinement */
+    .nav-logo-text span:first-child {
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      font-weight: 300;
+    }
+
+    .nav-logo-text span:last-child {
+      letter-spacing: 0.28em;
+      font-size: 0.52rem;
+    }
+
+
+    /* ─── DROPDOWN ───────────────────────────── */
+    .nav-dropdown { position: relative; }
+
+    .nav-dropdown > a {
+      display: flex; align-items: center; gap: 0.35rem;
+    }
+
+    .nav-dropdown > a::after { display: none !important; }
+
+    .dropdown-arrow {
+      font-size: 0.5rem;
+      opacity: 0.6;
+      transition: transform 0.3s;
+      margin-top: 1px;
+    }
+
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15,31,15,0.98);
+      border: 1px solid rgba(201,168,76,0.2);
+      min-width: 200px;
+      padding: 0.5rem 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateX(-50%) translateY(-8px);
+      backdrop-filter: blur(12px);
+      z-index: 200;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Gold top border on dropdown */
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.5), transparent);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem !important;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.75) !important;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a::after { display: none !important; }
+
+    .dropdown-menu a:hover {
+      color: var(--gold) !important;
+      background: rgba(201,168,76,0.06);
+    }
+
+    .dropdown-menu a.active {
+      color: var(--gold) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       NAVIGATION
+  ============================== -->
+  <nav id="navbar">
+    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <div class="nav-logo-img-wrap">
+        <img
+          class="nav-logo-img"
+          src="mjejane-assets/logo.png"
+          alt="Mjejane Game Reserve Logo"
+        />
+      </div>
+      <div class="nav-logo-text">
+        <span>Mjejane Game Reserve</span>
+        <span>Greater Kruger · South Africa</span>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#activities">Explore</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="news.html">News</a></li>
+      <li class="nav-dropdown">
+        <a href="#">Our Story <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="history.html">History of Mjejane</a>
+          <a href="geography.html">The Geography</a>
+          <a href="team.html">Our Team</a>
+          <a href="lodges.html">Lodges</a>
+        </div>
+      </li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about"         onclick="closeMobileNav()">About</a>
+    <a href="#activities"    onclick="closeMobileNav()">Explore</a>
+    <a href="#gallery"       onclick="closeMobileNav()">Gallery</a>
+    <a href="#contact"       onclick="closeMobileNav()">Enquire</a>
+  </div>
+
+  <!-- ==============================
+       HERO
+  ============================== -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title" style="color:#ffffff; font-weight:300;">Where the <em>Wild</em><br>Finds You</h1>
+      <p class="hero-sub">
+        A sanctuary at the confluence of the Crocodile River and the untamed African bush, 
+        where extraordinary wildlife encounters and timeless luxury intertwine.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-gold">Enquire Now</a>
+      </div>
+      <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <span>Discover</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       ABOUT
+  ============================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-image-wrap reveal">
+          <div class="about-main-img">
+            <img src="mjejane-assets/about.jpg" alt="Mjejane Game Reserve, Elephant" loading="lazy" /></div>
+          <div class="about-badge">
+            <strong>25+</strong>
+            <span>Years of<br/>Excellence</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p class="section-label reveal">History &amp; Heritage</p>
+          <span class="gold-divider left reveal reveal-delay-1"></span>
+          <h2 class="reveal reveal-delay-1">A Name Rooted in<br/><em style="font-style:italic;color:var(--gold-dark)">Living History</em></h2>
+          <p class="reveal reveal-delay-2">
+            The name Mjejane honours Chief Mjejane, who in 1828 led his people, many of them Tsonga, 
+            southward out of present-day Mozambique, fleeing the turbulence that followed the conquests 
+            of Zulu King Shaka. Chief Mjejane's group settled along the banks of the Crocodile River: 
+            the very ground on which this reserve stands today.
+          </p>
+          <p class="reveal reveal-delay-2">
+            Situated in Mpumalanga along the Crocodile River, Mjejane Private Game Reserve lies 
+            directly between the Malelane and Crocodile Bridge gates of the Kruger National Park. 
+            It holds a distinction shared by no other private reserve in South Africa, exclusive 
+            low-level bridge access that connects directly into the southern Kruger.
+          </p>
+          <p class="reveal reveal-delay-3">
+            This is Big Five wilderness, lion, leopard, elephant, rhino, and buffalo roam freely 
+            across the reserve and into Kruger beyond. The Crocodile River corridor draws exceptional 
+            predator density, prolific birdlife, and the kind of raw, unscripted wildlife encounters 
+            that cannot be manufactured elsewhere.
+          </p>
+
+          <div class="about-stats reveal reveal-delay-4">
+            <div class="stat-item" style="text-align:center">
+              <span class="stat-number">Big 5</span>
+              <span class="stat-label">Wilderness</span>
+            </div>
+            <div class="stat-item" style="text-align:center">
+              <span class="stat-number">350+</span>
+              <span class="stat-label">Bird Species</span>
+            </div>
+            <div class="stat-item" style="text-align:center">
+              <span class="stat-number">4,000</span>
+              <span class="stat-label">Hectares Wild</span>
+            </div>
+            <div class="stat-item" style="text-align:center">
+              <span class="stat-number">18</span>
+              <span class="stat-label">5-Star Lodges</span>
+            </div>
+          </div>
+
+          <div class="reveal reveal-delay-4" style="margin-top:2.5rem">
+            <a href="lodges.html" class="btn btn-forest">Our Lodges</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ==============================
+       ACTIVITIES
+  ============================== -->
+  <section id="activities" class="section">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <p class="section-label">How You'll Spend Your Days</p>
+        <span class="gold-divider"></span>
+        <h2>Experiences That<br/><em style="font-style:italic;color:var(--gold-dark)">Stay With You</em></h2>
+        <p>Beyond the ordinary safari, curated encounters that immerse you in the landscape and its 
+        wildlife, guided by rangers who have spent lifetimes reading the bush.</p>
+      </div>
+
+      <!-- Activity rows, image alternates sides -->
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal9.jpg" alt="Dawn game drive" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">01</span>
+          <h3>Dawn &amp; Dusk<br><em>Game Drives</em></h3>
+          <span class="act-rule"></span>
+          <p>Venture deep into Big Five territory aboard an open 4×4 at first light or last fire. Our senior rangers and trackers read the land with instincts sharpened over decades, every drive is unrepeatable.</p>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal6.jpg" alt="Guided bush walk" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">02</span>
+          <h3>Guided<br><em>Bush Walks</em></h3>
+          <span class="act-rule"></span>
+          <p>Read the land on foot with an armed field guide. Discover the hidden world beneath the grass, tracks, insects, medicinal plants, the intimate details a vehicle will never reveal.</p>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal5.jpg" alt="Birding at Mjejane" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">03</span>
+          <h3>Birding<br><em>Expeditions</em></h3>
+          <span class="act-rule"></span>
+          <p>With over 350 bird species recorded along the Crocodile River corridor, Mjejane is a birdwatcher's paradise. From the African Fish Eagle to the rare Pels Fishing Owl, the skies here astonish.</p>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal4.jpg" alt="Sundowner experience" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">04</span>
+          <h3>Sundowner<br><em>Experiences</em></h3>
+          <span class="act-rule"></span>
+          <p>As the bush cools and shadows lengthen, pause at a curated viewpoint with sundowners and canapés as the Lowveld sun paints the sky in shades of amber, copper, and fire.</p>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal2.jpg" alt="Night drive safari" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">05</span>
+          <h3>Night Drive<br><em>Safari</em></h3>
+          <span class="act-rule"></span>
+          <p>The African night belongs to a different cast entirely. A spotlight-guided drive reveals leopard, civets, porcupines, and the raw, unscripted drama of nocturnal predators on the hunt.</p>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal1.jpg" alt="Bush dining experience" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">06</span>
+          <h3>Bush<br><em>Dining</em></h3>
+          <span class="act-rule"></span>
+          <p>Dine under a canopy of stars at a lantern-lit boma, or take breakfast at the water's edge as the bush wakes around you. Every meal celebrates the finest South African produce and bold bush flavours.</p>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-img">
+          <img src="mjejane-assets/gal3.jpg" alt="Conservation at Mjejane" loading="lazy" />
+        </div>
+        <div class="act-text">
+          <span class="act-num">07</span>
+          <h3>Conservation<br><em>&amp; Legacy</em></h3>
+          <span class="act-rule"></span>
+          <p>Engage with our conservation team and learn about rhino protection, anti-poaching efforts, and the ecological stewardship that keeps Mjejane wild, and will continue to do so for generations to come.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       PARALLAX QUOTE
+  ============================== -->
+  <div class="quote-section">
+    <div class="quote-bg"></div>
+    <div class="quote-overlay"></div>
+    <div class="quote-content reveal">
+      <span class="gold-divider"></span>
+      <blockquote>
+        "Until you have sat beside a waterhole at dusk and watched 
+        an elephant drink in silence, you have not yet begun 
+        to understand Africa."
+      </blockquote>
+      <cite>, A Guest's Journal, Mjejane Game Reserve, 2023</cite>
+      <span class="gold-divider" style="margin-top:1.5rem"></span>
+    </div>
+  </div>
+
+  <!-- ==============================
+       GALLERY
+  ============================== -->
+  <section id="gallery" class="section section-alt">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <p class="section-label">The Reserve in Frames</p>
+        <span class="gold-divider"></span>
+        <h2>A Glimpse Into<br/><em style="font-style:italic;color:var(--gold-dark)">Wild Africa</em></h2>
+        <p>Moments captured on the reserve. Every frame tells the story of a place 
+        where nature still writes its own narrative, raw, beautiful, and entirely its own.</p>
+      </div>
+
+      <div class="masonry-grid reveal">
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal1.jpg" alt="Elephant at waterhole" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal2.jpg" alt="Leopard in tree" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal3.jpg" alt="Giraffe at sunset" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal4.jpg" alt="African savanna sunset" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal5.jpg" alt="Mjejane Game Reserve, Elephant" loading="lazy" /></div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal6.jpg" alt="Lion in grass" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal7.jpg" alt="African wild dog" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal8.jpg" alt="Zebra herd" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(this)">
+          <img src="mjejane-assets/gal9.jpg" alt="Bush at dusk" loading="lazy" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="Gallery image" />
+  </div>
+
+  <!-- ==============================
+       CONTACT
+  ============================== -->
+  <section id="contact" class="section">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <p class="section-label">Begin Your Journey</p>
+        <span class="gold-divider"></span>
+        <h2>Get in <em style="font-style:italic;color:var(--gold-dark)">Touch</em></h2>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-info reveal">
+          <p>
+            Whether you have a question about the reserve, want to know more about 
+            our accommodation, or simply want to find out if Mjejane is the right fit 
+            for your next escape, we'd love to hear from you. We respond to all 
+            enquiries within 24 hours.
+          </p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-item-icon">📍</div>
+              <div class="contact-item-text">
+                <span>Address</span>
+                <span>01 Mjejane Bush Camp Rd, Emjejane, 2021<br/>Greater Kruger Park, Mpumalanga</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">📞</div>
+              <div class="contact-item-text">
+                <span>Telephone</span>
+                <span>+27 (0) 13 753 0000</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">✉️</div>
+              <div class="contact-item-text">
+                <span>Email</span>
+                <span>reservations@mjejanegamereserve.co.za</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">💬</div>
+              <div class="contact-item-text">
+                <span>WhatsApp</span>
+                <span>+27 (0) 73 000 0000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-embed">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57620!2d31.987!3d-25.375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ee84e6a5d8a5555%3A0x0!2sMjejane%20Game%20Reserve!5e0!3m2!1sen!2sza!4v1"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mjejane Game Reserve Location">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal reveal-delay-1">
+          <h3>Send an Enquiry</h3>
+
+          <div id="formBody">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" placeholder="Your first name" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" placeholder="Your last name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="you@example.com" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="+27 xx xxx xxxx" />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Enquiry</label>
+              <textarea id="message" placeholder="Tell us how we can help, whether it's about our accommodation, activities, pricing, or anything else about your visit…"></textarea>
+            </div>
+
+            <button class="btn btn-forest" style="width:100%" onclick="handleSubmit()">
+              Send Enquiry
+            </button>
+          </div>
+
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon">✦</div>
+            <h4>Enquiry Received</h4>
+            <p>Thank you for reaching out to Mjejane Game Reserve. 
+            Our team will be in touch within 24 hours.</p>
+            <br/>
+            <a href="#activities" class="btn btn-forest" style="margin-top:0.5rem">Explore Activities</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img
+            class="footer-logo-img"
+            src="mjejane-assets/logo.png"
+            alt="Mjejane Game Reserve"
+          />
+          <p>
+            A premier safari destination on the banks of the Crocodile River, 
+            within the Greater Kruger Park ecosystem. Big 5 country. 
+            Luxury reimagined in the wild.
+          </p>
+          <div class="footer-socials">
+            <div class="social-btn">f</div>
+            <div class="social-btn">&#9737;</div>
+            <div class="social-btn">✈</div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <ul class="footer-links">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#activities">Safari Activities</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+      <li><a href="news.html">News</a></li>
+      <li class="nav-dropdown">
+        <a href="#">Our Story <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="history.html">History of Mjejane</a>
+          <a href="geography.html">The Geography</a>
+          <a href="team.html">Our Team</a>
+          <a href="lodges.html">Lodges</a>
+        </div>
+      </li>
+            <li><a href="#contact">Contact &amp; Directions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Activities</h5>
+          <ul class="footer-links">
+            <li><a href="#activities">Dawn Game Drives</a></li>
+            <li><a href="#activities">Guided Bush Walks</a></li>
+            <li><a href="#activities">Birding Expeditions</a></li>
+            <li><a href="#activities">Sundowner Experiences</a></li>
+            <li><a href="#activities">Night Drive Safari</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Useful Info</h5>
+          <ul class="footer-links">
+            <li><a href="#contact">Rates &amp; Availability</a></li>
+            <li><a href="#contact">Group Bookings</a></li>
+            <li><a href="#contact">Getting Here</a></li>
+            <li><a href="#">Health &amp; Safety</a></li>
+            <li><a href="#">Conservation Fund</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Mjejane Game Reserve. All Rights Reserved. 01 Mjejane Bush Camp Rd, Emjejane, Mpumalanga, South Africa.</p>
+        <p>Rates quoted in South African Rand (ZAR). Subject to availability.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==============================
+       WHATSAPP FLOAT
+  ============================== -->
+  <a class="whatsapp-float"
+     href="https://wa.me/27730000000?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20Mjejane%20River%20Lodge"
+     target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-tooltip">Chat with us</span>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- ==============================
+       JAVASCRIPT
+  ============================== -->
+  <script>
+    // Hero Ken-Burns entrance
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('load', () => heroBg.classList.add('loaded'));
+
+    // Parallax on hero
+    window.addEventListener('scroll', () => {
+      heroBg.style.transform = 'translateY(' + (window.scrollY * 0.35) + 'px) scale(1)';
+    }, { passive: true });
+
+    // Sticky navbar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 80);
+    }, { passive: true });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+
+    function closeMobileNav() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Gallery lightbox
+    function openLightbox(el) {
+      document.getElementById('lightboxImg').src = el.querySelector('img').src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Form submit
+    function handleSubmit() {
+      const fname = document.getElementById('fname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!fname || !email) { alert('Please enter your name and email to continue.'); return; }
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
